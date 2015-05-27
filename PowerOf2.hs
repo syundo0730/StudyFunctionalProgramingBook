@@ -1,23 +1,21 @@
 module PowerOf2 where
 
--- | 2の冪乗に対し、それが2の何乗されたものかを得る。
--- ただし、それ以外のときにはエラーになるので2の冪乗以外与えるべきでない
---
--- >>> exponentPowerOf2 1
--- 0
--- >>> exponentPowerOf2 2
--- 1
--- >>> exponentPowerOf2 3
--- *** Exception: 3 must be a power of 2.
--- >>> exponentPowerOf2 4
--- 2
--- >>> exponentPowerOf2 1024
--- 10
--- >>> exponentPowerOf2 (-1)
--- *** Exception: -1 must be a power of 2.
+-- | 2の冪乗型
+newtype PowerOf2 = PowerOf2 Integer deriving (Eq, Show)
 
-exponentPowerOf2 :: Integer -> Integer
-exponentPowerOf2 = exponentPowerOf2' 0 where
+-- 2の冪乗に対し、それが2の何乗されたものかを得る
+--
+-- >>> exponentPowerOf2 (PowerOf2 1)
+-- 0
+-- >>> exponentPowerOf2 (PowerOf2 2)
+-- 1
+-- >>> exponentPowerOf2 (PowerOf2 4)
+-- 2
+-- >>> exponentPowerOf2 (PowerOf2 1024)
+-- 10
+
+exponentPowerOf2 :: PowerOf2 -> Integer
+exponentPowerOf2 (PowerOf2 n) = exponentPowerOf2' 0 n where
     exponentPowerOf2' :: Integer -> Integer -> Integer
     exponentPowerOf2' r n
         | n == 1         = r
